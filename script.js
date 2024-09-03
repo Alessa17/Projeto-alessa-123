@@ -1,8 +1,8 @@
-caixaPrincipal = document.querySelector(".caixa-principal");
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
+const botaoIniciar = document.getElementById("botaoIniciar");
 
 const perguntas = [
     {
@@ -10,73 +10,73 @@ const perguntas = [
         alternativas: [
             {
                 texto: "Livros de ficção que permitem escapar da realidade!",
-                afirmacao: "No início ficou com medo do que essa tecnologia pode fazer. "
+                afirmacao: "Você adora histórias envolventes que transcendem o cotidiano, permitindo sonhar e imaginar novos mundos. "
             },
             {
                 texto: "Livros históricos que apresentam grandes valores para a sociedade atual!",
-                afirmacao: "Quis saber como usar IA no seu dia a dia."
+                afirmacao: "Você valoriza a leitura que resgata o passado, promovendo reflexão sobre o presente e inspirando mudanças para o futuro."
             }
         ]
     },
     {
-        enunciado: "Boa escolha! se pudesse ser um vilão qual você seria?",
+        enunciado: "Boa escolha! Se pudesse ser um vilão, qual você seria?",
         alternativas: [
             {
-                texto: "Coringa apesar de mentalmente desequilibrado, o vilão apresenta inteligência e estrategismo a nível genial.",
-                afirmacao: "Conseguiu utilizar a IA para buscar informações úteis."
+                texto: "Coringa, apesar de mentalmente desequilibrado, o vilão apresenta inteligência e estrategismo a nível genial.",
+                afirmacao: "Você aprecia personagens complexos e contraditórios, que desafiam o conceito tradicional de herói e vilão."
             },
             {
-                texto: "Thanos pois possui habilidades comuns aos Eternos, ampliado em maior grau através de uma combinação de sua herança.",
-                afirmacao: "Sentiu mais facilidade em utilizar seus próprios recursos para escrever seu trabalho."
+                texto: "Thanos, pois possui habilidades extraordinárias e uma visão de mundo impactante.",
+                afirmacao: "Você gosta de tramas grandiosas e personagens com motivações profundas, que levantam questões filosóficas sobre poder e moralidade."
             }
         ]
     },
     {
-        enunciado: " Uau muito bem! você se considera uma pessoa competitiva ?",
+        enunciado: "Uau, muito bem! Você se considera uma pessoa competitiva?",
         alternativas: [
             {
                 texto: "Sim, acredito que isso pode me beneficiar futuramente.",
-                afirmacao: "Vem impulsionando a inovação na área de IA e luta para abrir novos caminhos profissionais com IA."
+                afirmacao: "A competitividade é uma força que te leva a buscar sempre mais, seja no desenvolvimento pessoal ou na literatura, buscando histórias que desafiem seus pensamentos."
             },
             {
                 texto: "Não, acredito que isso não é bom.",
-                afirmacao: "Sua preocupação com as pessoas motivou a criar um grupo de estudos efendem a importância de proteger os trabalhadores.ntre trabalhadores para discutir meios de utilização de IA de forma ética."
+                afirmacao: "Você prefere um ritmo mais colaborativo e tranquilo, buscando na literatura histórias que promovam empatia e compreensão mútua."
             }
         ]
     },
     {
-        enunciado: "Isso pode ser bom até certo ponto! se você fosse um personagem você ia preferir ser enganado ou enganar?",
+        enunciado: "Isso pode ser bom até certo ponto! Se você fosse um personagem, preferiria ser enganado ou enganar?",
         alternativas: [
             {
-                texto: "Ser enganado,pois pelo menos iria ser uma boa pessoa!",
-                afirmacao: "Notou também que muitas pessoas não sabem ainda utilizar as ferramentas tradicionais e decidiu compartilhar seus conhecimentos de design utilizando ferramentas de pintura digital para iniciantes."
+                texto: "Ser enganado, pois pelo menos seria uma boa pessoa!",
+                afirmacao: "Você acredita na bondade inerente dos personagens e prefere narrativas onde os protagonistas aprendem com suas falhas e evoluem."
             },
             {
-                texto: "Enganar,hahahaha! ser o vilão. ",
-                afirmacao: "Acelerou o processo de criação de trabalhos utilizando geradores de imagem e agora consegue ensinar pessoas que sentem dificuldades em desenhar manualmente como utilizar também!"
+                texto: "Enganar, hahahaha! Ser o vilão.",
+                afirmacao: "Você gosta de histórias com personagens sombrios e cheios de nuances, que mostram que nem tudo é preto no branco."
             }
         ]
     },
     {
-        enunciado: "Muito bem!isso mostra que você iria ser uma boa pessoa, mas e quanto aos relacionamentos interpessoais? ",
+        enunciado: "Muito bem! Isso mostra que você seria uma boa pessoa, mas e quanto aos relacionamentos interpessoais?",
         alternativas: [
             {
-                texto: "Sem amigos, sem futuros relacionamentos somente a superação.",
-                afirmacao: "Infelizmente passou a utilizar a IA para fazer todas suas tarefas e agora se sente dependente da IA para tudo."
+                texto: "Sem amigos, sem futuros relacionamentos, somente a superação.",
+                afirmacao: "Você admira personagens solitários que se dedicam exclusivamente aos seus ideais, mesmo que isso signifique abrir mão de laços pessoais, como acontece em clássicos da literatura onde o protagonista enfrenta suas batalhas internas sozinho."
             },
             {
                 texto: "Superação e futuras amizades e relacionamentos.",
-                afirmacao: "Percebeu que toda IA reproduz orientações baseadas na empresa que programou e muito do que o chat escrevia não refletia o que pensava e por isso sabe que os textos gerados pela IA devem servir como auxílio e não resultado final. "
+                afirmacao: "Você prefere histórias onde os laços de amizade e amor são fundamentais para o crescimento do personagem, como ocorre em narrativas que ressaltam a importância das relações humanas para enfrentar desafios."
             }
         ]
-    },
+    }
 ];
-
 
 let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
 
+// Função para mostrar a pergunta
 function mostraPergunta() {
     if (atual >= perguntas.length) {
         mostraResultado();
@@ -88,8 +88,9 @@ function mostraPergunta() {
     mostraAlternativas();
 }
 
-function mostraAlternativas(){
-    for(const alternativa of perguntaAtual.alternativas) {
+// Função para mostrar as alternativas
+function mostraAlternativas() {
+    for (const alternativa of perguntaAtual.alternativas) {
         const botaoAlternativas = document.createElement("button");
         botaoAlternativas.textContent = alternativa.texto;
         botaoAlternativas.addEventListener("click", () => respostaSelecionada(alternativa));
@@ -97,18 +98,22 @@ function mostraAlternativas(){
     }
 }
 
+// Função ao selecionar uma resposta
 function respostaSelecionada(opcaoSelecionada) {
-    const afirmacoes = opcaoSelecionada.afirmacao;
-    historiaFinal += afirmacoes + "Isso tudo mostra o quanto você tem a personalidade forte e um campo da literatura voltado aos livros de ficção.";
+    historiaFinal += opcaoSelecionada.afirmacao + " ";
     atual++;
     mostraPergunta();
 }
 
+// Função para mostrar o resultado final
 function mostraResultado() {
-    atual++;
-    caixaPerguntas.textContent = "Parabéns!Isso mostra o quanto você tem a personalidade forte e um campo literario amplo, indicações- ( aprenda a gostar de todos os estilos) Anne frank, guerra e paz, george orweel, orgulho e preconceito, noite na taverna e as da literatura brasileira.";
-    textoResultado.textContent = historiaFinal;
+    caixaPerguntas.textContent = "Parabéns! Isso mostra o quanto você tem uma personalidade forte e um gosto literário diversificado.";
+    textoResultado.textContent = historiaFinal + " Você aprecia livros que provocam reflexões profundas sobre a vida, a humanidade e as emoções que nos conectam.";
     caixaAlternativas.textContent = "";
 }
 
-mostraPergunta();
+// Evento de clique no botão "Iniciar"
+botaoIniciar.addEventListener("click", () => {
+    botaoIniciar.style.display = "none"; // Esconde o botão após iniciar
+    mostraPergunta();
+});
